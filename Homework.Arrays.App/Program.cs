@@ -59,7 +59,7 @@ namespace Iki.Boyutlu.Diziler.App
                             vizenot = Convert.ToDouble(vize);//Değişken tipini şimdilik işlem yapabilmek için,
                             finalnot = Convert.ToDouble(final);//Double tipine dönüştürüyorum
 
-                            ort = Ortalama(vizenot, finalnot);
+                            ort = Ortalama(vizenot, finalnot);//ORTALAMA ALMA METODUMUZU ÇAĞIRDIM
 
                             string ortString = Convert.ToString(ort);//Burada da dizimiz string olduğu için stringe geri dönüştürüyorum
                             ogrenciler[i, j] = ortString;
@@ -71,7 +71,7 @@ namespace Iki.Boyutlu.Diziler.App
 
                             ort = Ortalama(vizenot, finalnot);
                            
-                            ogrenciler[i, j] = Harf(ort);
+                            ogrenciler[i, j] = Harf(ort);//HARF NOTU METODUMUZU ÇAĞIRDIM
                             break;
 
                         default:
