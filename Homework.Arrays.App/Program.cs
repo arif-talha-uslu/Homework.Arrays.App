@@ -61,7 +61,7 @@ namespace Iki.Boyutlu.Diziler.App
 
                             ort = Ortalama(vizenot, finalnot);//ORTALAMA ALMA METODUMUZU ÇAĞIRDIM
 
-                            string ortString = Convert.ToString(ort);//Burada da dizimiz string olduğu için stringe geri dönüştürüyorum
+                            string ortString = Convert.ToString(ort);//Burada da dizi string tipinde olduğu için stringe geri dönüştürüyorum
                             ogrenciler[i, j] = ortString;
                             break;
 
