@@ -11,7 +11,7 @@ namespace Iki.Boyutlu.Diziler.App
         static void Main(string[] args)//ARIF TALHA USLU 203801009 || FROM: GAZI UNIVERSITY
         {
             Console.Write("Toplam öğrenci sayısını giriniz: ");
-            int mevcut = int.Parse(Console.ReadLine());
+            byte mevcut = byte.Parse(Console.ReadLine());
 
             string[,] ogrenciler = new string[mevcut + 1, 6];//TODO: DİZİYİ TANIMLAMA
             ogrenciler[0, 0] = "Ad";
@@ -23,14 +23,12 @@ namespace Iki.Boyutlu.Diziler.App
 
             for (int i = 1; i < ogrenciler.GetLength(0); i++)//TODO: HER SATIR İÇİN DEĞER ATAMA
             {
-                string vize = "";
-                string final = "";
+                double vize=0;//her satırda not değerleri sıfırlanmalı
+                double final=0;//sütunlar arasında işlem olduğundan
+                double ort=0;//satır bölümünde tanımladım
                 Console.WriteLine(" ");
                 for (int j = 0; j < ogrenciler.GetLength(1); j++)//TODO: HER SÜTUN İÇİN DEĞER ATAMA
                 {
-                    double vizenot;
-                    double finalnot;
-                    double ort;
                     switch (j)
                     {
                         case 0:
@@ -45,32 +43,22 @@ namespace Iki.Boyutlu.Diziler.App
 
                         case 2:
                             Console.Write($"{i}. Öğrencinin Vize Notunu Giriniz(Sayıyla): ");
-                            vize = Console.ReadLine();
-                            ogrenciler[i, j] = vize;
+                            vize = double.Parse(Console.ReadLine());//ondalık işlem yapabilmek için double tipinde alıyorum
+                            ogrenciler[i, j] = Convert.ToString(vize);//dizimiz string olduğu için, atama yaparken stringe dönüştürüyorum
                             break;
 
                         case 3:
                             Console.Write($"{i}. Öğrencinin Final Notunu Giriniz(Sayıyla): ");
-                            final = Console.ReadLine();
-                            ogrenciler[i, j] = final;
+                            final = double.Parse(Console.ReadLine());
+                            ogrenciler[i, j] = Convert.ToString(final);
                             break;
 
                         case 4:
-                            vizenot = Convert.ToDouble(vize);//Değişken tipini şimdilik işlem yapabilmek için,
-                            finalnot = Convert.ToDouble(final);//Double tipine dönüştürüyorum
-
-                            ort = Ortalama(vizenot, finalnot);//ORTALAMA ALMA METODUMUZU ÇAĞIRDIM
-
-                            string ortString = Convert.ToString(ort);//Burada da dizi string tipinde olduğu için stringe geri dönüştürüyorum
-                            ogrenciler[i, j] = ortString;
+                            ort = Ortalama(vize, final);//ORTALAMA ALMA METODUMUZU ÇAĞIRDIM
+                            ogrenciler[i, j] = Convert.ToString(ort);
                             break;
 
                         case 5:
-                            vizenot = Convert.ToDouble(vize);
-                            finalnot = Convert.ToDouble(final);
-
-                            ort = Ortalama(vizenot, finalnot);
-                           
                             ogrenciler[i, j] = Harf(ort);//HARF NOTU METODUMUZU ÇAĞIRDIM
                             break;
 
@@ -80,7 +68,7 @@ namespace Iki.Boyutlu.Diziler.App
                 }
             }
             Console.WriteLine(" ");
-            Console.WriteLine("-------------------------------------------------------------------------------------");
+            Console.WriteLine("-----------------------------------------------------------------------");
             for (int i = 0; i < ogrenciler.GetLength(0); i++)//TODO: DİZİYİ YAZDIRMA
             {
                 for (int j = 0; j < ogrenciler.GetLength(1); j++)
@@ -93,52 +81,33 @@ namespace Iki.Boyutlu.Diziler.App
 
         static double Ortalama(double vize, double final)//TODO: ORTALAMA METODU
         {
-            double bir = (vize * 40) / 100;
-            double iki = (final * 60) / 100;
-            double sonuc = bir + iki;
-            return sonuc;
+            double ortalama = (vize * 40) / 100 + (final * 60) / 100;
+            return ortalama;
         }
 
         static string Harf(double ortalama)//TODO: HARF NOTU METODU
         {
             string harfnotu = "bos";
             double not = (ortalama * 4) / 100;
-            if (4 >= not && not > 3.5)
-            {
-                harfnotu = "AA";
-            }
-            else if (3.5 >= not && not > 3)
-            {
-                harfnotu = "BA";
-            }
-            else if (3 >= not && not > 2.5)
-            {
-                harfnotu = "BB";
-            }
-            else if (2.5 >= not && not > 2)
-            {
-                harfnotu = "CB";
-            }
-            else if (2 >= not && not > 1.5)
-            {
-                harfnotu = "CC";
-            }
-            else if (1.5 >= not && not > 1)
-            {
-                harfnotu = "DC";
-            }
-            else if (1 >= not && not > 0.5)
-            {
-                harfnotu = "DD";
-            }
-            else if (0.5 >= not && not > 0)
-            {
-                harfnotu = "FD";
-            }
-            else if (not == 0)
-            {
-                harfnotu = "FF";
-            }
+
+            if (4 >= not && not > 3.5){harfnotu = "AA";}
+
+            else if (3.5 >= not && not > 3){harfnotu = "BA";}
+
+            else if (3 >= not && not > 2.5){harfnotu = "BB";}
+
+            else if (2.5 >= not && not > 2){harfnotu = "CB";}
+
+            else if (2 >= not && not > 1.5){harfnotu = "CC";}
+
+            else if (1.5 >= not && not > 1){harfnotu = "DC";}
+
+            else if (1 >= not && not > 0.5){harfnotu = "DD";}
+
+            else if (0.5 >= not && not > 0){harfnotu = "FD";}
+
+            else if (not == 0){harfnotu = "FF";}
+
             return harfnotu;
         }
     }
